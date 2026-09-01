@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="myetcd benchmark results and latency data.">
+  <title>myetcd Benchmark Results</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <nav class="site-nav" aria-label="页面导航">
+        <a href="#environment">测试环境</a>
+        <a href="#matrix">延迟和吞吐量</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="overview" id="environment" aria-labelledby="environment-title">
+      <div class="container">
+        <div class="environment-copy">
+          <h1 id="environment-title">测试环境</h1>
+          <ul class="environment-list">
+            <li>3 台集群节点：每台 2 vCPU + 2 GiB 内存 + 50 GB SSD</li>
+            <li>1 台压测机：2 vCPU + 4 GiB 内存 + 50 GB SSD</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="matrix-section" id="matrix" aria-labelledby="matrix-title">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <h2 id="matrix-title">延迟和吞吐量</h2>
+            <p class="benchmark-config">基准配置：单次测试请求量 100,000 | Key 26 B | Value 256 B | 物理连接数 3（各节点单连接多路复用）| 读取一致性 Linearizable</p>
+          </div>
+        </div>
+
+        <div class="workload-tabs" role="tablist" aria-label="选择测试场景">
+          <button type="button" role="tab" id="put-tab" aria-controls="put-panel" aria-selected="true" data-workload="put">Put（写入）</button>
+          <button type="button" role="tab" id="range-tab" aria-controls="range-panel" aria-selected="false" data-workload="range" tabindex="-1">Range（只读）</button>
+          <button type="button" role="tab" id="mixed-tab" aria-controls="mixed-panel" aria-selected="false" data-workload="mixed" tabindex="-1">Mixed（70% 读 / 30% 写）</button>
+        </div>
+
+        <div id="workload-panels"></div>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>
